@@ -2,7 +2,6 @@
 beta <- 20
 phi <- 0.9
 sigma <- 0.2
-# sigma <- 0.4
 TT <- 1000
 
 #b_H<- 3 * sigma / sqrt(1 - phi^2)
@@ -149,3 +148,4 @@ sigma_ci_f1
 sqrt(diag(VarCov_hat_f1))
 mean(est_df_f1$mse)
 mean(est_df_f1$llk)
+
