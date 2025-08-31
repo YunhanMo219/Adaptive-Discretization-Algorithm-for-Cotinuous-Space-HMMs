@@ -53,11 +53,11 @@ w <- 1
 n_steps <- nrow(Y_Sample) - window_size  # 25
 n_series <- ncol(Y_Sample)               # 100
 
-# yhat_mat <- matrix(NA, n_steps, n_series)
-# L95_mat  <- matrix(NA, n_steps, n_series)
-# U95_mat  <- matrix(NA, n_steps, n_series)
-# COV_mat  <- matrix(NA, n_steps, n_series)
-# resid_mat <- matrix(NA, n_steps, n_series)
+yhat_mat <- matrix(NA, n_steps, n_series)
+L95_mat  <- matrix(NA, n_steps, n_series)
+U95_mat  <- matrix(NA, n_steps, n_series)
+COV_mat  <- matrix(NA, n_steps, n_series)
+resid_mat <- matrix(NA, n_steps, n_series)
 
 
 
@@ -65,11 +65,10 @@ n_series <- ncol(Y_Sample)               # 100
 
 
 ###########################################################################
-####################分批次跑，千万别弄前面的代码###########################
 
-for (j in 59:59) {
+for (j in 1:n_series) {
   Y_col <- Y_Sample[[j]]
-  for (i in 14:14) {
+  for (i in 1:n_steps) {
     Y_window <- Y_col[i:(i + window_size - 1)]
     
     xmin <- max(0, min(Y_window) - margin)
@@ -128,6 +127,7 @@ write.csv(resid_mat, file.path(out_dir, "sim_resid_adaptive1.csv"),   row.names 
 true_mat <- Y_Sample[(window_size+1):nrow(Y_Sample), ]
 mse_vec <- colMeans((yhat_mat - true_mat)^2, na.rm=TRUE)
 write.csv(data.frame(MSE = mse_vec), file.path(out_dir, "sim_MSE_adaptive1.csv"), row.names = FALSE)
+
 
 
 
