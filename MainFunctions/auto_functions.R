@@ -1,4 +1,4 @@
-# two functions are defined in this file, one to estimate parameters under likelihood framewor,
+# two functions are defined in this file, one to estimate parameters under likelihood framework,
 # one to find the enssential domain and m automatically.
 
 # function to estimate parameters under likelihood framework
@@ -188,3 +188,4 @@ local_decoding_auto <- function(Y, w, max_adjust = 10, max_m_adjust = 10, verbos
                   lambda_upper_eti = lambda_upper_eti)
   return(results)
 }
+
