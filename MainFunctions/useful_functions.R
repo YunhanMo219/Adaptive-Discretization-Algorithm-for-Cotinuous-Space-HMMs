@@ -42,14 +42,6 @@ initial_par <- function(Y, w, c = 1) {
   return(result)
 }
 
-## functions for log likelihood
-asFinite <- function(x) {
-  if (any(nifi <- !is.finite(x)))
-    x[nifi] <- sign(x[nifi]) * .Machine$double.xmax
-  x
-}
-
-
 # function to compute log likelihood of parameters
 llk_1d <- function(lbeta, tphi, lsigma, Y, grid_vectors, w){
   beta <- exp(lbeta)
@@ -113,7 +105,7 @@ compute_eti_intervals <- function(stateprobs, states, alpha = 0.95) {
   
   for (t in 1:TT) {
     probs <- stateprobs[, t]
-    probs <- probs / sum(probs)  # 归一化
+    probs <- probs / sum(probs)  
     cdf <- cumsum(probs)
     
     lower_idx <- which(cdf >= (1 - alpha)/2)[1]
@@ -166,9 +158,3 @@ local_decoding <- function(beta_hat, phi_hat, sigma_hat, grid_vectors, Y, w){
   
   return(list(Xt_hat=Xt_hat, lower_eti = et_interval$lower, upper_eti = et_interval$upper))
 }
-
-
-
-
-
-
